@@ -13,12 +13,13 @@ namespace E_Voting_System
 {
     public partial class DashboardForm: Form
     {
-        LoginForm loginForm = new LoginForm();
 
         private bool isLoggingOut = false;
-        public DashboardForm()
+        private LoginForm loginForm;
+        public DashboardForm(LoginForm form)
         {
             InitializeComponent();
+            loginForm = form;
         }
 
         private void DashboardForm_Load(object sender, EventArgs e)
@@ -119,11 +120,18 @@ namespace E_Voting_System
             }
         }
 
-        private void manageVote_Button_Click(object sender, EventArgs e)
+        private void ShowOnlyPanel(Panel panelToShow)
         {
-            manageVote_Panel.Visible = true;
+            manageVote_Panel.Visible = false;
             manageCandidates_Panel.Visible = false;
             manageElections_Panel.Visible = false;
+
+            panelToShow.Visible = true;
+        }
+
+        private void manageVote_Button_Click(object sender, EventArgs e)
+        {
+            ShowOnlyPanel(manageVote_Panel);
             manageVote_Button.BackColor = Color.WhiteSmoke;
             manageCandidates_Button.BackColor = Color.White;
             manageElections_Button.BackColor = Color.White;
@@ -131,9 +139,7 @@ namespace E_Voting_System
 
         private void manageCandidates_Button_Click(object sender, EventArgs e)
         {
-            manageVote_Panel.Visible = false;
-            manageCandidates_Panel.Visible = true;
-            manageElections_Panel.Visible = false;
+            ShowOnlyPanel(manageCandidates_Panel);
             manageVote_Button.BackColor = Color.White;
             manageCandidates_Button.BackColor = Color.WhiteSmoke;
             manageElections_Button.BackColor = Color.White;
@@ -141,9 +147,7 @@ namespace E_Voting_System
 
         private void manageElections_Button_Click(object sender, EventArgs e)
         {
-            manageVote_Panel.Visible = false;
-            manageCandidates_Panel.Visible = false;
-            manageElections_Panel.Visible = true;
+            ShowOnlyPanel(manageElections_Panel);
             manageVote_Button.BackColor = Color.White;
             manageCandidates_Button.BackColor = Color.White;
             manageElections_Button.BackColor = Color.WhiteSmoke;

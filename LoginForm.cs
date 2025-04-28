@@ -14,7 +14,6 @@ namespace E_Voting_System
     public partial class LoginForm: Form
     {   
         static MySqlConnection connection = new MySqlConnection("server=localhost;user=root;password=;database=e_voting_system");
-        static DashboardForm dashboardForm = new DashboardForm();
         public LoginForm()
         {
             InitializeComponent();
@@ -165,10 +164,12 @@ namespace E_Voting_System
                     insertCommand.Parameters.AddWithValue("@idNumber", idNumber);
                     insertCommand.ExecuteNonQuery();
                     CurrentUserID = idNumber;
+                    idText_Log.Focus();
                     idText_Log.Text = "";
                     passText_Log.Text = "";
-                    this.Hide();
+                    DashboardForm dashboardForm = new DashboardForm(this);
                     dashboardForm.Show();
+                    this.Hide();
                 }
                 else
                 {
