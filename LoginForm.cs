@@ -14,19 +14,19 @@ namespace E_Voting_System
     public partial class LoginForm: Form
     {   
         static MySqlConnection connection = new MySqlConnection("server=localhost;user=root;password=;database=e_voting_system");
-
+        static DashboardForm dashboardForm = new DashboardForm();
         public LoginForm()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void LoginForm_Load(object sender, EventArgs e)
         {
             idText_Log.Focus();
         }
 
         public static int CurrentUserID;
-        private Boolean logSession = true;
+        private Boolean logSession = true;  
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -98,7 +98,8 @@ namespace E_Voting_System
                 registerPanel.Visible = false;
                 loginPanel.Enabled = true;
                 loginPanel.Visible = true;
-
+                idText_Log.Focus();
+                logSession = true;
             }
             catch (Exception ex)
             {
@@ -151,7 +152,6 @@ namespace E_Voting_System
                 return;
             }
             searchCommand.Parameters.AddWithValue("@password", passText_Log.Text);
-
             try
             {
                 connection.Open();
@@ -168,9 +168,7 @@ namespace E_Voting_System
                     idText_Log.Text = "";
                     passText_Log.Text = "";
                     this.Hide();
-                    DashboardForm dashboardForm = new DashboardForm();
-                    dashboardForm.ShowDialog();
-                    this.Show();
+                    dashboardForm.Show();
                 }
                 else
                 {
@@ -189,6 +187,11 @@ namespace E_Voting_System
                 connection.Close();
             }
 
+        }
+
+        private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
