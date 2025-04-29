@@ -112,6 +112,7 @@ namespace E_Voting_System
         private void EnterKey_Event(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter){
+                loginBtn.Focus();
                 if (logSession == false)
                 {
                     registerBtn_Click(sender, e);
