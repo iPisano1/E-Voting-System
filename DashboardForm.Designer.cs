@@ -367,12 +367,12 @@
             // mainPanelDB
             // 
             this.mainPanelDB.BackColor = System.Drawing.Color.Transparent;
-            this.mainPanelDB.Controls.Add(this.manageElections_Panel);
             this.mainPanelDB.Controls.Add(this.addVoter_Panel);
             this.mainPanelDB.Controls.Add(this.addCandidates_Panel);
             this.mainPanelDB.Controls.Add(this.addVoter_Button);
             this.mainPanelDB.Controls.Add(this.addCandidates_Button);
             this.mainPanelDB.Controls.Add(this.manageElections_Button);
+            this.mainPanelDB.Controls.Add(this.manageElections_Panel);
             this.mainPanelDB.ForeColor = System.Drawing.Color.Transparent;
             this.mainPanelDB.Location = new System.Drawing.Point(32, 103);
             this.mainPanelDB.Margin = new System.Windows.Forms.Padding(2);
