@@ -40,7 +40,6 @@ namespace E_Voting_System
             addVoter_Button.Select();
             activeColorButton(addVoter_Button);
             ShowOnlyPanel(addVoter_Panel);
-            FillCandidateBox(positionID);
         }
 
         public Boolean isAdmin() {
@@ -155,6 +154,7 @@ namespace E_Voting_System
             EmptyField();
             FillPositionBox(voters_VotePosition_Box);
             voters_Candidate_Box.Enabled = false;
+            FillCandidateBox(positionID);
         }
 
         private void addCandidates_Button_Click(object sender, EventArgs e)

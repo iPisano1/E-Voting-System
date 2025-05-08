@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DashboardForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -119,7 +117,7 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.Transparent;
-            this.panel3.BackgroundImage = global::E_Voting_System.Properties.Resources.Commission_on_Elections__COMELEC__svg;
+            this.panel3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel3.BackgroundImage")));
             this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel3.Location = new System.Drawing.Point(47, 21);
             this.panel3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -158,9 +156,8 @@
             // manageElections_Button
             // 
             this.manageElections_Button.BackColor = System.Drawing.Color.Transparent;
-            this.manageElections_Button.FlatAppearance.BorderSize = 2;
             this.manageElections_Button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.manageElections_Button.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.manageElections_Button.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.manageElections_Button.ForeColor = System.Drawing.SystemColors.MenuText;
             this.manageElections_Button.Location = new System.Drawing.Point(811, 0);
             this.manageElections_Button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -175,9 +172,8 @@
             // addCandidates_Button
             // 
             this.addCandidates_Button.BackColor = System.Drawing.Color.Transparent;
-            this.addCandidates_Button.FlatAppearance.BorderSize = 2;
             this.addCandidates_Button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.addCandidates_Button.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addCandidates_Button.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addCandidates_Button.ForeColor = System.Drawing.SystemColors.MenuText;
             this.addCandidates_Button.Location = new System.Drawing.Point(565, 0);
             this.addCandidates_Button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -191,9 +187,8 @@
             // addVoter_Button
             // 
             this.addVoter_Button.BackColor = System.Drawing.Color.Transparent;
-            this.addVoter_Button.FlatAppearance.BorderSize = 2;
             this.addVoter_Button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.addVoter_Button.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addVoter_Button.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addVoter_Button.ForeColor = System.Drawing.SystemColors.MenuText;
             this.addVoter_Button.Location = new System.Drawing.Point(319, 0);
             this.addVoter_Button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -455,8 +450,6 @@
             this.manageElections_ResultsDataGrid.AllowUserToDeleteRows = false;
             this.manageElections_ResultsDataGrid.AllowUserToResizeColumns = false;
             this.manageElections_ResultsDataGrid.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Red;
-            this.manageElections_ResultsDataGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.manageElections_ResultsDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.manageElections_ResultsDataGrid.BackgroundColor = System.Drawing.Color.White;
             this.manageElections_ResultsDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -473,14 +466,7 @@
             this.manageElections_ResultsDataGrid.ReadOnly = true;
             this.manageElections_ResultsDataGrid.RowHeadersVisible = false;
             this.manageElections_ResultsDataGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            this.manageElections_ResultsDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.manageElections_ResultsDataGrid.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.Navy;
             this.manageElections_ResultsDataGrid.RowTemplate.Height = 24;
-            this.manageElections_ResultsDataGrid.RowTemplate.ReadOnly = true;
-            this.manageElections_ResultsDataGrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.manageElections_ResultsDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.manageElections_ResultsDataGrid.Size = new System.Drawing.Size(1200, 246);
             this.manageElections_ResultsDataGrid.TabIndex = 9;
@@ -826,40 +812,39 @@
             // 
             this.Column1.FillWeight = 25F;
             this.Column1.HeaderText = "";
-            this.Column1.Image = global::E_Voting_System.Properties.Resources.login_icon_3048;
-            this.Column1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
             this.Column1.MinimumWidth = 6;
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
-            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // Column2
             // 
-            this.Column2.FillWeight = 104.9466F;
             this.Column2.HeaderText = "CANDIDATE ID";
             this.Column2.MinimumWidth = 6;
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
+            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // Column3
             // 
-            this.Column3.FillWeight = 104.9466F;
             this.Column3.HeaderText = "FULL NAME";
             this.Column3.MinimumWidth = 6;
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
+            this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // Column4
             // 
-            this.Column4.FillWeight = 104.9466F;
             this.Column4.HeaderText = "POSITION";
             this.Column4.MinimumWidth = 6;
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
+            this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // Column5
             // 
-            this.Column5.FillWeight = 104.9466F;
             this.Column5.HeaderText = "VOTES";
             this.Column5.MinimumWidth = 6;
             this.Column5.Name = "Column5";
@@ -869,7 +854,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::E_Voting_System.Properties.Resources._5594016;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1487, 791);
             this.Controls.Add(this.mainPanelDB);
