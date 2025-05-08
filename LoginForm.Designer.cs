@@ -50,6 +50,7 @@
             this.passText_Reg = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.idText_Reg = new System.Windows.Forms.TextBox();
+            this.loginForm_ExitBtn = new System.Windows.Forms.Button();
             this.loginPanel.SuspendLayout();
             this.registerPanel.SuspendLayout();
             this.SuspendLayout();
@@ -66,7 +67,7 @@
             this.loginPanel.Controls.Add(this.passText_Log);
             this.loginPanel.Controls.Add(this.panel2);
             this.loginPanel.Controls.Add(this.idText_Log);
-            this.loginPanel.Location = new System.Drawing.Point(775, 90);
+            this.loginPanel.Location = new System.Drawing.Point(776, 112);
             this.loginPanel.Margin = new System.Windows.Forms.Padding(4);
             this.loginPanel.Name = "loginPanel";
             this.loginPanel.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
@@ -178,7 +179,7 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.label1.Location = new System.Drawing.Point(220, 306);
+            this.label1.Location = new System.Drawing.Point(240, 329);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(316, 70);
@@ -191,7 +192,7 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.label2.Location = new System.Drawing.Point(117, 375);
+            this.label2.Location = new System.Drawing.Point(146, 399);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(495, 70);
@@ -204,7 +205,7 @@
             this.panel1.BackgroundImage = global::E_Voting_System.Properties.Resources.Commission_on_Elections__COMELEC__svg;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel1.ForeColor = System.Drawing.Color.Transparent;
-            this.panel1.Location = new System.Drawing.Point(289, 111);
+            this.panel1.Location = new System.Drawing.Point(290, 133);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(208, 192);
@@ -223,7 +224,7 @@
             this.registerPanel.Controls.Add(this.panel4);
             this.registerPanel.Controls.Add(this.idText_Reg);
             this.registerPanel.Enabled = false;
-            this.registerPanel.Location = new System.Drawing.Point(775, 90);
+            this.registerPanel.Location = new System.Drawing.Point(776, 112);
             this.registerPanel.Margin = new System.Windows.Forms.Padding(4);
             this.registerPanel.Name = "registerPanel";
             this.registerPanel.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
@@ -331,6 +332,22 @@
             this.idText_Reg.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.idText_Reg.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EnterKey_Event);
             // 
+            // loginForm_ExitBtn
+            // 
+            this.loginForm_ExitBtn.BackColor = System.Drawing.Color.Transparent;
+            this.loginForm_ExitBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.loginForm_ExitBtn.FlatAppearance.BorderSize = 0;
+            this.loginForm_ExitBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.loginForm_ExitBtn.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loginForm_ExitBtn.ForeColor = System.Drawing.Color.Black;
+            this.loginForm_ExitBtn.Location = new System.Drawing.Point(1183, 1);
+            this.loginForm_ExitBtn.Name = "loginForm_ExitBtn";
+            this.loginForm_ExitBtn.Size = new System.Drawing.Size(52, 46);
+            this.loginForm_ExitBtn.TabIndex = 12;
+            this.loginForm_ExitBtn.Text = "X";
+            this.loginForm_ExitBtn.UseVisualStyleBackColor = false;
+            this.loginForm_ExitBtn.Click += new System.EventHandler(this.loginForm_ExitBtn_Click);
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -338,13 +355,14 @@
             this.BackgroundImage = global::E_Voting_System.Properties.Resources._5594016;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1236, 640);
+            this.Controls.Add(this.loginForm_ExitBtn);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.loginPanel);
             this.Controls.Add(this.registerPanel);
             this.ForeColor = System.Drawing.SystemColors.Control;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
@@ -386,6 +404,7 @@
         private System.Windows.Forms.TextBox passText_Reg;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.TextBox idText_Reg;
+        private System.Windows.Forms.Button loginForm_ExitBtn;
     }
 }
 

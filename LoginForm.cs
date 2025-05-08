@@ -168,7 +168,7 @@ namespace E_Voting_System
                     idText_Log.Focus();
                     idText_Log.Text = "";
                     passText_Log.Text = "";
-                    DashboardForm dashboardForm = new DashboardForm(this);
+                    DashboardForm dashboardForm = new DashboardForm();
                     dashboardForm.Show();
                     this.Hide();
                 }
@@ -192,6 +192,11 @@ namespace E_Voting_System
         }
 
         private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void loginForm_ExitBtn_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }

@@ -16,15 +16,13 @@ namespace E_Voting_System
     {
 
         private bool isLoggingOut = false;
-        private LoginForm loginForm;
         private bool adminMode = false;
         private string ScreenView;
         private int positionID;
 
-        public DashboardForm(LoginForm form)
+        public DashboardForm()
         {
             InitializeComponent();
-            loginForm = form;
         }
 
         private void DashboardForm_Load(object sender, EventArgs e)
@@ -42,7 +40,6 @@ namespace E_Voting_System
             addVoter_Button.Select();
             activeColorButton(addVoter_Button);
             ShowOnlyPanel(addVoter_Panel);
-            FillPositionBox();
             FillCandidateBox(positionID);
         }
 
@@ -89,18 +86,8 @@ namespace E_Voting_System
 
         private void DashboardForm_FormClosing_1(object sender, FormClosingEventArgs e)
         {
-            if (!isLoggingOut) {
-                DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Confirm Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result == DialogResult.No)
-                {
-                    e.Cancel = true;
-                }
-                else {
-                    updateLoggedStatus();
-                    Application.Exit();
-                }
-       
-            }
+            updateLoggedStatus();
+            Application.Exit();
         }
 
         private void logoutBtn_Click(object sender, EventArgs e)
@@ -110,8 +97,9 @@ namespace E_Voting_System
             if (result == DialogResult.Yes) {
                 isLoggingOut = true;
                 updateLoggedStatus();
-                this.Hide();
+                LoginForm loginForm = new LoginForm();
                 loginForm.Show();
+                this.Hide();
             }
         }
 
@@ -147,11 +135,16 @@ namespace E_Voting_System
         }
 
         private void activeColorButton(Button buttonToChange) {
-            addVoter_Button.BackColor = Color.White;
-            addCandidates_Button.BackColor = Color.White;
-            manageElections_Button.BackColor = Color.White;
+            addVoter_Button.BackColor = Color.Transparent;
+            addCandidates_Button.BackColor = Color.Transparent;
+            manageElections_Button.BackColor = Color.Transparent;
+
+            //addVoter_Button.Font = new Font(addVoter_Button.Font, FontStyle.Regular);
+            //addCandidates_Button.Font = new Font(addCandidates_Button.Font, FontStyle.Regular);
+            //manageElections_Button.Font = new Font(manageElections_Button.Font, FontStyle.Regular);
 
             buttonToChange.BackColor = Color.WhiteSmoke;
+            //buttonToChange.Font = new Font(buttonToChange.Font, FontStyle.Underline);    
         }
 
         private void addVoter_Button_Click(object sender, EventArgs e)
@@ -159,6 +152,9 @@ namespace E_Voting_System
             ScreenView = "addVoters";
             ShowOnlyPanel(addVoter_Panel);
             activeColorButton(addVoter_Button);
+            EmptyField();
+            FillPositionBox(voters_VotePosition_Box);
+            voters_Candidate_Box.Enabled = false;
         }
 
         private void addCandidates_Button_Click(object sender, EventArgs e)
@@ -166,6 +162,8 @@ namespace E_Voting_System
             ScreenView = "addCandidates";
             ShowOnlyPanel(addCandidates_Panel);
             activeColorButton(addCandidates_Button);
+            EmptyField();
+            FillPositionBox(candidate_Position_Box);
         }
 
         private void manageElections_Button_Click(object sender, EventArgs e)
@@ -173,6 +171,7 @@ namespace E_Voting_System
             ScreenView = "manageElections";
             ShowOnlyPanel(manageElections_Panel);
             activeColorButton(manageElections_Button);
+            EmptyField();
         }
 
         private void EmptyField() {
@@ -190,6 +189,7 @@ namespace E_Voting_System
                 candidate_LastName_Field.Text = "";
                 candidate_Email_Field.Text = "";
                 candidate_PhoneNumber_Field.Text = "";
+                candidate_BirthDate_Field.Value = DateTime.Now;
                 candidate_Position_Box.SelectedIndex = -1;
                 return;
             }
@@ -238,7 +238,7 @@ namespace E_Voting_System
             }
         }
 
-        public void FillPositionBox() {
+        public void FillPositionBox(ComboBox comboBox) {
             using (MySqlConnection connection = new MySqlConnection("server=localhost;user=root;password=;database=e_voting_system")){
                 MySqlCommand fillCommand = new MySqlCommand("SELECT `Position ID`, `Position` FROM position", connection);
                 try
@@ -247,15 +247,12 @@ namespace E_Voting_System
                     MySqlDataAdapter adapter = new MySqlDataAdapter(fillCommand);
                     adapter.Fill(dt);
 
-                    candidate_Position_Box.DataSource = dt;
-                    candidate_Position_Box.DisplayMember = "Position";     
-                    candidate_Position_Box.ValueMember = "Position ID";
-                    candidate_Position_Box.SelectedIndex = -1;
+                    comboBox.DataSource = dt;
+                    comboBox.DisplayMember = "Position";
+                    comboBox.ValueMember = "Position ID";
+                    comboBox.SelectedIndex = -1;
+                    comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
 
-                    voters_VotePosition_Box.DataSource = dt.Copy();
-                    voters_VotePosition_Box.DisplayMember = "Position";
-                    voters_VotePosition_Box.ValueMember = "Position ID";
-                    voters_VotePosition_Box.SelectedIndex = -1;
                 }
                 catch (Exception ex)
                 {
@@ -285,7 +282,7 @@ namespace E_Voting_System
                         return;
                     }
 
-                        dt.Columns.Add("FullName", typeof(string));
+                    dt.Columns.Add("FullName", typeof(string));
                     foreach (DataRow row in dt.Rows)
                     {
                         row["FullName"] = row["Last Name"] + ", " + row["First Name"];
@@ -294,6 +291,7 @@ namespace E_Voting_System
                     voters_Candidate_Box.DataSource = dt;
                     voters_Candidate_Box.DisplayMember = "FullName";
                     voters_Candidate_Box.ValueMember = "Candidate ID";
+                    voters_Candidate_Box.DropDownStyle = ComboBoxStyle.DropDownList;
                 }
                 catch (Exception ex)
                 {
@@ -364,7 +362,7 @@ namespace E_Voting_System
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void voters_AddBtn_Click(object sender, EventArgs e)
         {
             if (isEmpty())
             {
@@ -437,6 +435,33 @@ namespace E_Voting_System
                 finally {
                     connection.Close();
                 }
+            }
+        }
+
+        private void viewResultsBtn_Click(object sender, EventArgs e)
+        {
+            manageElections_ChoiceBox_Panel.Visible = false;
+            viewResultsPanel.Visible = true;
+            FillPositionBox(manageElections_ResultPositionBox);
+        }
+
+        private void viewResultsPanel_BackBtn_Click(object sender, EventArgs e)
+        {
+            manageElections_ChoiceBox_Panel.Visible = true;
+            viewResultsPanel.Visible = false;
+        }
+
+        private void adminPanelBtn_Click(object sender, EventArgs e)
+        {
+            AdminForm adminForm = new AdminForm();
+            adminForm.Show();
+            this.Hide();
+        }
+
+        public void displayResultGrid() {
+            using (MySqlConnection connection = new MySqlConnection("server=localhost;user=root;password=;database=e_voting_system")) {
+                connection.Open();
+                MySqlCommand displayCommand = new MySqlCommand("" ,connection);
             }
         }
     }
