@@ -24,10 +24,11 @@ CREATE TABLE IF NOT EXISTS `candidates` (
   UNIQUE KEY `Email` (`Email`),
   KEY `FK_candidates_position` (`Position`),
   CONSTRAINT `FK_candidates_position` FOREIGN KEY (`Position`) REFERENCES `position` (`Position ID`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `candidates` (`Candidate ID`, `First Name`, `Last Name`, `Gender`, `Email`, `Phone Number`, `Birth Date`, `Position`, `Status`) VALUES
-	(9, 'Rendyl John', 'Carlos', 'Male', 'rendyljohncarlos540@gmail.com', '09663564939', '2004-07-03', 1, '0');
+	(9, 'Rendyl John', 'Carlos', 'Male', 'rendyljohncarlos540@gmail.com', '09663564939', '2004-07-03', 1, '0'),
+	(10, 'Bensi', 'Opaon', 'Male', 'Opaon@gmail.com', '09663564939', '2006-06-13', 1, '0');
 
 CREATE TABLE IF NOT EXISTS `election` (
   `Election ID` int(11) NOT NULL AUTO_INCREMENT,
