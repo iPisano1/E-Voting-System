@@ -19,22 +19,24 @@ CREATE TABLE IF NOT EXISTS `candidates` (
   `Phone Number` varchar(50) NOT NULL DEFAULT '',
   `Birth Date` date NOT NULL,
   `Position` int(11) NOT NULL,
-  `Status` varchar(50) NOT NULL DEFAULT '0',
+  `Status` varchar(50) NOT NULL DEFAULT 'Pending',
   PRIMARY KEY (`Candidate ID`),
   UNIQUE KEY `Email` (`Email`),
   KEY `FK_candidates_position` (`Position`),
   CONSTRAINT `FK_candidates_position` FOREIGN KEY (`Position`) REFERENCES `position` (`Position ID`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `candidates` (`Candidate ID`, `First Name`, `Last Name`, `Gender`, `Email`, `Phone Number`, `Birth Date`, `Position`, `Status`) VALUES
-	(9, 'Rendyl John', 'Carlos', 'Male', 'rendyljohncarlos540@gmail.com', '09663564939', '2004-07-03', 1, '0'),
-	(10, 'Bensi', 'Opaon', 'Male', 'Opaon@gmail.com', '09663564939', '2006-06-13', 1, '0');
+	(9, 'Rendyl John', 'Carlos', 'Male', 'rendyljohncarlos540@gmail.com', '09663564939', '2004-07-03', 1, 'Approved'),
+	(10, 'Bensi', 'Opaon', 'Male', 'Opaon@gmail.com', '09663564939', '2006-06-14', 1, 'Approved'),
+	(12, 'Kyle', 'Boyonas', 'Male', 'Kyle@gmail.com', '09663564939', '1995-11-29', 1, 'Approved');
 
 CREATE TABLE IF NOT EXISTS `election` (
   `Election ID` int(11) NOT NULL AUTO_INCREMENT,
   `Voter` int(11) NOT NULL DEFAULT 0,
   `Candidate` int(11) NOT NULL DEFAULT 0,
   `Position` int(11) NOT NULL DEFAULT 0,
+  `Date Voted` date DEFAULT curdate(),
   PRIMARY KEY (`Election ID`),
   KEY `FK_election_election_position` (`Position`),
   KEY `FK_election_candidates` (`Candidate`),
@@ -42,10 +44,12 @@ CREATE TABLE IF NOT EXISTS `election` (
   CONSTRAINT `FK_election_candidates` FOREIGN KEY (`Candidate`) REFERENCES `candidates` (`Candidate ID`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `FK_election_election_position` FOREIGN KEY (`Position`) REFERENCES `position` (`Position ID`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `FK_election_voters` FOREIGN KEY (`Voter`) REFERENCES `voters` (`Voters ID`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `election` (`Election ID`, `Voter`, `Candidate`, `Position`) VALUES
-	(8, 1, 9, 1);
+INSERT INTO `election` (`Election ID`, `Voter`, `Candidate`, `Position`, `Date Voted`) VALUES
+	(8, 1, 9, 1, '2025-05-11'),
+	(12, 4, 9, 1, '2025-05-15'),
+	(16, 5, 9, 1, '2025-05-16');
 
 CREATE TABLE IF NOT EXISTS `position` (
   `Position ID` int(11) NOT NULL AUTO_INCREMENT,
@@ -65,17 +69,18 @@ INSERT INTO `position` (`Position ID`, `Position`) VALUES
 	(9, 'SK');
 
 CREATE TABLE IF NOT EXISTS `users` (
-  `userID` int(11) NOT NULL AUTO_INCREMENT,
+  `User ID` int(11) NOT NULL AUTO_INCREMENT,
   `ID Number` int(11) NOT NULL,
   `Password` varchar(20) NOT NULL,
   `is_Logged` tinyint(1) NOT NULL DEFAULT 0,
-  `Permission` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `Permission` varchar(20) DEFAULT 'Voter',
+  PRIMARY KEY (`User ID`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `users` (`userID`, `ID Number`, `Password`, `is_Logged`, `Permission`) VALUES
-	(1, 1, 'admin', 0, 'admin'),
-	(4, 20149410, 'ipisano', 0, '');
+INSERT INTO `users` (`User ID`, `ID Number`, `Password`, `is_Logged`, `Permission`) VALUES
+	(1, 1, 'admin', 0, 'Admin'),
+	(2, 2, 'ipisano', 0, 'Employee'),
+	(3, 3, 'voterpass', 0, 'Voter');
 
 CREATE TABLE IF NOT EXISTS `voters` (
   `Voters ID` int(11) NOT NULL AUTO_INCREMENT,
@@ -85,10 +90,12 @@ CREATE TABLE IF NOT EXISTS `voters` (
   `Phone Number` varchar(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`Voters ID`) USING BTREE,
   UNIQUE KEY `Email` (`Email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `voters` (`Voters ID`, `First Name`, `Last Name`, `Email`, `Phone Number`) VALUES
-	(1, 'James', 'Karding', 'Karding@gmail.com', '09783456677');
+	(1, 'Kolokoy', 'Karding', 'Karding@gmail.com', '09783456677'),
+	(4, 'Kenz', 'Abarquez', 'abarquez@gmail.com', '09663564939'),
+	(5, 'Toto', 'Augusto', 'Augusto@gmail.com', '09663564939');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
