@@ -29,12 +29,14 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DashboardForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.dashboardForm_ExitBtn = new System.Windows.Forms.Button();
+            this.homeBtn = new System.Windows.Forms.LinkLabel();
             this.adminBtn = new System.Windows.Forms.Button();
             this.manageElections_Button = new System.Windows.Forms.Button();
             this.addCandidates_Button = new System.Windows.Forms.Button();
@@ -59,14 +61,19 @@
             this.manageElections_Panel = new System.Windows.Forms.Panel();
             this.viewResultsPanel = new System.Windows.Forms.Panel();
             this.manageElections_ResultsDataGrid = new System.Windows.Forms.DataGridView();
+            this.imageColumn = new System.Windows.Forms.DataGridViewImageColumn();
+            this.candidateIDColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fullNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.positionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.votesColumn = new E_Voting_System.DataGridViewProgressBarColumn();
             this.viewResultsPanel_BackBtn = new System.Windows.Forms.Button();
             this.manageElections_ResultPositionBox = new System.Windows.Forms.ComboBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.manageElections_ChoiceBox_Panel = new System.Windows.Forms.Panel();
             this.viewResultsBtn = new System.Windows.Forms.Button();
-            this.adminPanelBtn = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.adminPanelBtn = new System.Windows.Forms.Button();
             this.addCandidates_Panel = new System.Windows.Forms.Panel();
             this.label17 = new System.Windows.Forms.Label();
             this.candidate_Position_Box = new System.Windows.Forms.ComboBox();
@@ -86,16 +93,14 @@
             this.candidate_FirstName_Field = new System.Windows.Forms.TextBox();
             this.addCandidate_Button = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.homeBtn = new System.Windows.Forms.LinkLabel();
-            this.imageColumn = new System.Windows.Forms.DataGridViewImageColumn();
-            this.candidateIDColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fullNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.positionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.votesColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.welcomePanel = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewProgressBarColumn1 = new E_Voting_System.DataGridViewProgressBarColumn();
             this.panel1.SuspendLayout();
             this.addVoter_Panel.SuspendLayout();
             this.mainPanelDB.SuspendLayout();
@@ -109,9 +114,11 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.panel1.Controls.Add(this.homeBtn);
+            this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.panel3);
+            this.panel1.Controls.Add(this.dashboardForm_ExitBtn);
+            this.panel1.Controls.Add(this.homeBtn);
             this.panel1.Controls.Add(this.adminBtn);
             this.panel1.Controls.Add(this.manageElections_Button);
             this.panel1.Controls.Add(this.addCandidates_Button);
@@ -122,95 +129,153 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1120, 67);
             this.panel1.TabIndex = 1;
+            this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.Transparent;
             this.panel3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel3.BackgroundImage")));
             this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel3.Location = new System.Drawing.Point(35, 17);
+            this.panel3.ForeColor = System.Drawing.Color.Transparent;
+            this.panel3.Location = new System.Drawing.Point(36, 13);
             this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(34, 37);
+            this.panel3.Size = new System.Drawing.Size(37, 37);
             this.panel3.TabIndex = 3;
+            // 
+            // dashboardForm_ExitBtn
+            // 
+            this.dashboardForm_ExitBtn.BackColor = System.Drawing.Color.Transparent;
+            this.dashboardForm_ExitBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dashboardForm_ExitBtn.FlatAppearance.BorderSize = 0;
+            this.dashboardForm_ExitBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dashboardForm_ExitBtn.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dashboardForm_ExitBtn.ForeColor = System.Drawing.Color.Black;
+            this.dashboardForm_ExitBtn.Location = new System.Drawing.Point(1065, 13);
+            this.dashboardForm_ExitBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.dashboardForm_ExitBtn.Name = "dashboardForm_ExitBtn";
+            this.dashboardForm_ExitBtn.Size = new System.Drawing.Size(39, 37);
+            this.dashboardForm_ExitBtn.TabIndex = 13;
+            this.dashboardForm_ExitBtn.Text = "X";
+            this.dashboardForm_ExitBtn.UseVisualStyleBackColor = false;
+            this.dashboardForm_ExitBtn.Click += new System.EventHandler(this.dashboardForm_ExitBtn_Click);
+            // 
+            // homeBtn
+            // 
+            this.homeBtn.ActiveLinkColor = System.Drawing.Color.Black;
+            this.homeBtn.AutoSize = true;
+            this.homeBtn.BackColor = System.Drawing.Color.Transparent;
+            this.homeBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.homeBtn.DisabledLinkColor = System.Drawing.Color.Black;
+            this.homeBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.homeBtn.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.homeBtn.LinkColor = System.Drawing.Color.Black;
+            this.homeBtn.Location = new System.Drawing.Point(77, 13);
+            this.homeBtn.Name = "homeBtn";
+            this.homeBtn.Size = new System.Drawing.Size(150, 37);
+            this.homeBtn.TabIndex = 7;
+            this.homeBtn.TabStop = true;
+            this.homeBtn.Text = "Dashboard";
+            this.homeBtn.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.homeBtn_LinkClicked);
             // 
             // adminBtn
             // 
             this.adminBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(185)))), ((int)(((byte)(30)))));
+            this.adminBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.adminBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(185)))), ((int)(((byte)(30)))));
-            this.adminBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.adminBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.adminBtn.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.adminBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.adminBtn.Location = new System.Drawing.Point(852, 12);
+            this.adminBtn.Image = global::E_Voting_System.Properties.Resources.admin_panel;
+            this.adminBtn.Location = new System.Drawing.Point(804, -1);
             this.adminBtn.Name = "adminBtn";
-            this.adminBtn.Size = new System.Drawing.Size(124, 42);
+            this.adminBtn.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
+            this.adminBtn.Size = new System.Drawing.Size(136, 66);
             this.adminBtn.TabIndex = 2;
             this.adminBtn.Text = "Admin Mode";
+            this.adminBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.adminBtn.UseVisualStyleBackColor = false;
             this.adminBtn.Visible = false;
             this.adminBtn.Click += new System.EventHandler(this.adminBtn_Click);
             // 
             // manageElections_Button
             // 
-            this.manageElections_Button.BackColor = System.Drawing.Color.White;
+            this.manageElections_Button.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.manageElections_Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.manageElections_Button.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.manageElections_Button.FlatAppearance.BorderSize = 0;
             this.manageElections_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.manageElections_Button.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.manageElections_Button.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.manageElections_Button.ForeColor = System.Drawing.SystemColors.MenuText;
             this.manageElections_Button.Image = global::E_Voting_System.Properties.Resources.management;
-            this.manageElections_Button.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.manageElections_Button.Location = new System.Drawing.Point(629, 0);
+            this.manageElections_Button.Location = new System.Drawing.Point(592, -2);
             this.manageElections_Button.Margin = new System.Windows.Forms.Padding(2);
             this.manageElections_Button.Name = "manageElections_Button";
-            this.manageElections_Button.Size = new System.Drawing.Size(180, 68);
+            this.manageElections_Button.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+            this.manageElections_Button.Size = new System.Drawing.Size(170, 67);
             this.manageElections_Button.TabIndex = 4;
-            this.manageElections_Button.Text = "Manage Elections";
+            this.manageElections_Button.Text = " Manage Elections";
+            this.manageElections_Button.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.manageElections_Button.UseVisualStyleBackColor = false;
             this.manageElections_Button.Visible = false;
             this.manageElections_Button.Click += new System.EventHandler(this.manageElections_Button_Click);
             // 
             // addCandidates_Button
             // 
-            this.addCandidates_Button.BackColor = System.Drawing.Color.White;
+            this.addCandidates_Button.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.addCandidates_Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.addCandidates_Button.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addCandidates_Button.FlatAppearance.BorderSize = 0;
             this.addCandidates_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addCandidates_Button.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addCandidates_Button.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addCandidates_Button.ForeColor = System.Drawing.SystemColors.MenuText;
             this.addCandidates_Button.Image = global::E_Voting_System.Properties.Resources.user_avatar;
-            this.addCandidates_Button.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.addCandidates_Button.Location = new System.Drawing.Point(445, 0);
+            this.addCandidates_Button.Location = new System.Drawing.Point(418, -1);
             this.addCandidates_Button.Margin = new System.Windows.Forms.Padding(2);
             this.addCandidates_Button.Name = "addCandidates_Button";
-            this.addCandidates_Button.Size = new System.Drawing.Size(180, 68);
+            this.addCandidates_Button.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.addCandidates_Button.Size = new System.Drawing.Size(170, 67);
             this.addCandidates_Button.TabIndex = 5;
-            this.addCandidates_Button.Text = "Add New Candidate";
+            this.addCandidates_Button.Text = " Add New Candidate";
+            this.addCandidates_Button.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.addCandidates_Button.UseVisualStyleBackColor = false;
+            this.addCandidates_Button.Visible = false;
             this.addCandidates_Button.Click += new System.EventHandler(this.addCandidates_Button_Click);
             // 
             // addVoter_Button
             // 
-            this.addVoter_Button.BackColor = System.Drawing.Color.White;
+            this.addVoter_Button.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.addVoter_Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.addVoter_Button.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addVoter_Button.FlatAppearance.BorderSize = 0;
             this.addVoter_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addVoter_Button.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addVoter_Button.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addVoter_Button.ForeColor = System.Drawing.SystemColors.MenuText;
             this.addVoter_Button.Image = global::E_Voting_System.Properties.Resources.group;
-            this.addVoter_Button.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.addVoter_Button.Location = new System.Drawing.Point(260, 0);
+            this.addVoter_Button.Location = new System.Drawing.Point(244, -1);
             this.addVoter_Button.Margin = new System.Windows.Forms.Padding(2);
             this.addVoter_Button.Name = "addVoter_Button";
-            this.addVoter_Button.Size = new System.Drawing.Size(180, 68);
+            this.addVoter_Button.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.addVoter_Button.Size = new System.Drawing.Size(170, 67);
             this.addVoter_Button.TabIndex = 3;
-            this.addVoter_Button.Text = "Add New Voter";
+            this.addVoter_Button.Text = " Add New Voter";
+            this.addVoter_Button.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.addVoter_Button.UseVisualStyleBackColor = false;
             this.addVoter_Button.Click += new System.EventHandler(this.addVoter_Button_Click);
             // 
             // logoutBtn
             // 
             this.logoutBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(59)))), ((int)(((byte)(59)))));
+            this.logoutBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.logoutBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(59)))), ((int)(((byte)(59)))));
+            this.logoutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.logoutBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.logoutBtn.Location = new System.Drawing.Point(996, 12);
+            this.logoutBtn.Image = global::E_Voting_System.Properties.Resources.logout;
+            this.logoutBtn.Location = new System.Drawing.Point(960, -1);
             this.logoutBtn.Name = "logoutBtn";
-            this.logoutBtn.Size = new System.Drawing.Size(89, 42);
+            this.logoutBtn.Size = new System.Drawing.Size(89, 67);
             this.logoutBtn.TabIndex = 0;
-            this.logoutBtn.Text = "Log Out";
+            this.logoutBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.logoutBtn.UseVisualStyleBackColor = false;
             this.logoutBtn.Click += new System.EventHandler(this.logoutBtn_Click);
             // 
@@ -253,8 +318,10 @@
             // 
             // voters_Candidate_Box
             // 
+            this.voters_Candidate_Box.BackColor = System.Drawing.Color.WhiteSmoke;
             this.voters_Candidate_Box.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.voters_Candidate_Box.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.voters_Candidate_Box.ForeColor = System.Drawing.Color.Black;
             this.voters_Candidate_Box.FormattingEnabled = true;
             this.voters_Candidate_Box.Location = new System.Drawing.Point(746, 244);
             this.voters_Candidate_Box.Name = "voters_Candidate_Box";
@@ -275,8 +342,10 @@
             // 
             // voters_VotePosition_Box
             // 
+            this.voters_VotePosition_Box.BackColor = System.Drawing.Color.WhiteSmoke;
             this.voters_VotePosition_Box.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.voters_VotePosition_Box.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.voters_VotePosition_Box.ForeColor = System.Drawing.Color.Black;
             this.voters_VotePosition_Box.FormattingEnabled = true;
             this.voters_VotePosition_Box.Location = new System.Drawing.Point(746, 169);
             this.voters_VotePosition_Box.Name = "voters_VotePosition_Box";
@@ -311,7 +380,9 @@
             // 
             // voters_PhoneNumber_Field
             // 
+            this.voters_PhoneNumber_Field.BackColor = System.Drawing.Color.WhiteSmoke;
             this.voters_PhoneNumber_Field.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.voters_PhoneNumber_Field.ForeColor = System.Drawing.Color.Black;
             this.voters_PhoneNumber_Field.Location = new System.Drawing.Point(396, 244);
             this.voters_PhoneNumber_Field.Name = "voters_PhoneNumber_Field";
             this.voters_PhoneNumber_Field.Size = new System.Drawing.Size(310, 33);
@@ -331,7 +402,9 @@
             // 
             // voters_Email_Field
             // 
+            this.voters_Email_Field.BackColor = System.Drawing.Color.WhiteSmoke;
             this.voters_Email_Field.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.voters_Email_Field.ForeColor = System.Drawing.Color.Black;
             this.voters_Email_Field.Location = new System.Drawing.Point(396, 169);
             this.voters_Email_Field.Name = "voters_Email_Field";
             this.voters_Email_Field.Size = new System.Drawing.Size(310, 33);
@@ -351,7 +424,9 @@
             // 
             // voters_LastName_Field
             // 
+            this.voters_LastName_Field.BackColor = System.Drawing.Color.WhiteSmoke;
             this.voters_LastName_Field.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.voters_LastName_Field.ForeColor = System.Drawing.Color.Black;
             this.voters_LastName_Field.Location = new System.Drawing.Point(42, 244);
             this.voters_LastName_Field.Name = "voters_LastName_Field";
             this.voters_LastName_Field.Size = new System.Drawing.Size(310, 33);
@@ -371,7 +446,9 @@
             // 
             // voters_FirstName_Field
             // 
+            this.voters_FirstName_Field.BackColor = System.Drawing.Color.WhiteSmoke;
             this.voters_FirstName_Field.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.voters_FirstName_Field.ForeColor = System.Drawing.Color.Black;
             this.voters_FirstName_Field.Location = new System.Drawing.Point(42, 169);
             this.voters_FirstName_Field.Name = "voters_FirstName_Field";
             this.voters_FirstName_Field.Size = new System.Drawing.Size(310, 33);
@@ -406,11 +483,9 @@
             // 
             // manageElections_Panel
             // 
-            this.manageElections_Panel.BackColor = System.Drawing.Color.White;
-            this.manageElections_Panel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.manageElections_Panel.BackColor = System.Drawing.Color.Transparent;
             this.manageElections_Panel.Controls.Add(this.viewResultsPanel);
             this.manageElections_Panel.Controls.Add(this.manageElections_ChoiceBox_Panel);
-            this.manageElections_Panel.Controls.Add(this.label4);
             this.manageElections_Panel.Location = new System.Drawing.Point(0, 0);
             this.manageElections_Panel.Margin = new System.Windows.Forms.Padding(2);
             this.manageElections_Panel.Name = "manageElections_Panel";
@@ -421,16 +496,17 @@
             // 
             // viewResultsPanel
             // 
+            this.viewResultsPanel.BackColor = System.Drawing.Color.White;
             this.viewResultsPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.viewResultsPanel.Controls.Add(this.manageElections_ResultsDataGrid);
             this.viewResultsPanel.Controls.Add(this.viewResultsPanel_BackBtn);
             this.viewResultsPanel.Controls.Add(this.manageElections_ResultPositionBox);
             this.viewResultsPanel.Controls.Add(this.label18);
             this.viewResultsPanel.Controls.Add(this.label19);
-            this.viewResultsPanel.Location = new System.Drawing.Point(34, 84);
+            this.viewResultsPanel.Location = new System.Drawing.Point(36, 41);
             this.viewResultsPanel.Margin = new System.Windows.Forms.Padding(38, 41, 38, 41);
             this.viewResultsPanel.Name = "viewResultsPanel";
-            this.viewResultsPanel.Size = new System.Drawing.Size(979, 380);
+            this.viewResultsPanel.Size = new System.Drawing.Size(977, 423);
             this.viewResultsPanel.TabIndex = 4;
             this.viewResultsPanel.Visible = false;
             // 
@@ -440,25 +516,25 @@
             this.manageElections_ResultsDataGrid.AllowUserToDeleteRows = false;
             this.manageElections_ResultsDataGrid.AllowUserToResizeColumns = false;
             this.manageElections_ResultsDataGrid.AllowUserToResizeRows = false;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.Black;
-            this.manageElections_ResultsDataGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.manageElections_ResultsDataGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.manageElections_ResultsDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.manageElections_ResultsDataGrid.BackgroundColor = System.Drawing.Color.White;
             this.manageElections_ResultsDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.manageElections_ResultsDataGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle14.Padding = new System.Windows.Forms.Padding(3);
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.manageElections_ResultsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            this.manageElections_ResultsDataGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(3);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.manageElections_ResultsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.manageElections_ResultsDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.manageElections_ResultsDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.imageColumn,
@@ -466,70 +542,118 @@
             this.fullNameColumn,
             this.positionColumn,
             this.votesColumn});
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.manageElections_ResultsDataGrid.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.manageElections_ResultsDataGrid.DefaultCellStyle = dataGridViewCellStyle3;
             this.manageElections_ResultsDataGrid.EnableHeadersVisualStyles = false;
+            this.manageElections_ResultsDataGrid.GridColor = System.Drawing.Color.DodgerBlue;
             this.manageElections_ResultsDataGrid.Location = new System.Drawing.Point(38, 136);
             this.manageElections_ResultsDataGrid.Margin = new System.Windows.Forms.Padding(38, 41, 38, 41);
             this.manageElections_ResultsDataGrid.MultiSelect = false;
             this.manageElections_ResultsDataGrid.Name = "manageElections_ResultsDataGrid";
             this.manageElections_ResultsDataGrid.ReadOnly = true;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.BackColor = System.Drawing.Color.Brown;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle16.ForeColor = System.Drawing.Color.Brown;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.Brown;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.Brown;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.manageElections_ResultsDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Brown;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Brown;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Brown;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Brown;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.manageElections_ResultsDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.manageElections_ResultsDataGrid.RowHeadersVisible = false;
             this.manageElections_ResultsDataGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.manageElections_ResultsDataGrid.RowTemplate.Height = 30;
             this.manageElections_ResultsDataGrid.RowTemplate.ReadOnly = true;
             this.manageElections_ResultsDataGrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.manageElections_ResultsDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.manageElections_ResultsDataGrid.Size = new System.Drawing.Size(900, 200);
+            this.manageElections_ResultsDataGrid.Size = new System.Drawing.Size(900, 242);
             this.manageElections_ResultsDataGrid.TabIndex = 9;
+            // 
+            // imageColumn
+            // 
+            this.imageColumn.FillWeight = 25F;
+            this.imageColumn.HeaderText = "";
+            this.imageColumn.MinimumWidth = 6;
+            this.imageColumn.Name = "imageColumn";
+            this.imageColumn.ReadOnly = true;
+            // 
+            // candidateIDColumn
+            // 
+            this.candidateIDColumn.HeaderText = "CANDIDATE ID";
+            this.candidateIDColumn.MinimumWidth = 6;
+            this.candidateIDColumn.Name = "candidateIDColumn";
+            this.candidateIDColumn.ReadOnly = true;
+            this.candidateIDColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.candidateIDColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // fullNameColumn
+            // 
+            this.fullNameColumn.HeaderText = "FULL NAME";
+            this.fullNameColumn.MinimumWidth = 6;
+            this.fullNameColumn.Name = "fullNameColumn";
+            this.fullNameColumn.ReadOnly = true;
+            this.fullNameColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.fullNameColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // positionColumn
+            // 
+            this.positionColumn.HeaderText = "POSITION";
+            this.positionColumn.MinimumWidth = 6;
+            this.positionColumn.Name = "positionColumn";
+            this.positionColumn.ReadOnly = true;
+            this.positionColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.positionColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // votesColumn
+            // 
+            this.votesColumn.HeaderText = "VOTES";
+            this.votesColumn.MinimumWidth = 6;
+            this.votesColumn.Name = "votesColumn";
+            this.votesColumn.ReadOnly = true;
+            this.votesColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.votesColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // viewResultsPanel_BackBtn
             // 
+            this.viewResultsPanel_BackBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.viewResultsPanel_BackBtn.FlatAppearance.BorderSize = 0;
+            this.viewResultsPanel_BackBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.viewResultsPanel_BackBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.viewResultsPanel_BackBtn.ForeColor = System.Drawing.Color.Black;
-            this.viewResultsPanel_BackBtn.Location = new System.Drawing.Point(837, 35);
+            this.viewResultsPanel_BackBtn.Image = global::E_Voting_System.Properties.Resources.back_arrow;
+            this.viewResultsPanel_BackBtn.Location = new System.Drawing.Point(895, 25);
             this.viewResultsPanel_BackBtn.Margin = new System.Windows.Forms.Padding(2);
             this.viewResultsPanel_BackBtn.Name = "viewResultsPanel_BackBtn";
-            this.viewResultsPanel_BackBtn.Size = new System.Drawing.Size(94, 31);
+            this.viewResultsPanel_BackBtn.Size = new System.Drawing.Size(43, 43);
             this.viewResultsPanel_BackBtn.TabIndex = 8;
-            this.viewResultsPanel_BackBtn.Text = "Go Back";
             this.viewResultsPanel_BackBtn.UseVisualStyleBackColor = false;
             this.viewResultsPanel_BackBtn.Click += new System.EventHandler(this.viewResultsPanel_BackBtn_Click);
             // 
             // manageElections_ResultPositionBox
             // 
-            this.manageElections_ResultPositionBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
+            this.manageElections_ResultPositionBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.manageElections_ResultPositionBox.FormattingEnabled = true;
-            this.manageElections_ResultPositionBox.Location = new System.Drawing.Point(38, 96);
+            this.manageElections_ResultPositionBox.Location = new System.Drawing.Point(38, 92);
             this.manageElections_ResultPositionBox.Margin = new System.Windows.Forms.Padding(2);
             this.manageElections_ResultPositionBox.Name = "manageElections_ResultPositionBox";
-            this.manageElections_ResultPositionBox.Size = new System.Drawing.Size(245, 33);
+            this.manageElections_ResultPositionBox.Size = new System.Drawing.Size(209, 29);
             this.manageElections_ResultPositionBox.TabIndex = 7;
             this.manageElections_ResultPositionBox.SelectedIndexChanged += new System.EventHandler(this.manageElections_ResultPositionBox_SelectedIndexChanged);
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.Color.Black;
-            this.label18.Location = new System.Drawing.Point(33, 68);
+            this.label18.Location = new System.Drawing.Point(34, 69);
             this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(79, 25);
+            this.label18.Size = new System.Drawing.Size(65, 21);
             this.label18.TabIndex = 6;
             this.label18.Text = "Position";
             // 
@@ -537,18 +661,21 @@
             // 
             this.label19.AutoSize = true;
             this.label19.BackColor = System.Drawing.Color.Transparent;
-            this.label19.Font = new System.Drawing.Font("Segoe UI", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label19.ForeColor = System.Drawing.Color.Black;
             this.label19.Location = new System.Drawing.Point(31, 25);
             this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(118, 41);
+            this.label19.Size = new System.Drawing.Size(108, 37);
             this.label19.TabIndex = 5;
             this.label19.Text = "Results";
             // 
             // manageElections_ChoiceBox_Panel
             // 
+            this.manageElections_ChoiceBox_Panel.BackColor = System.Drawing.Color.White;
+            this.manageElections_ChoiceBox_Panel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.manageElections_ChoiceBox_Panel.Controls.Add(this.viewResultsBtn);
+            this.manageElections_ChoiceBox_Panel.Controls.Add(this.label4);
             this.manageElections_ChoiceBox_Panel.Controls.Add(this.adminPanelBtn);
             this.manageElections_ChoiceBox_Panel.Location = new System.Drawing.Point(229, 167);
             this.manageElections_ChoiceBox_Panel.Margin = new System.Windows.Forms.Padding(2);
@@ -558,9 +685,10 @@
             // 
             // viewResultsBtn
             // 
+            this.viewResultsBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.viewResultsBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.viewResultsBtn.ForeColor = System.Drawing.Color.Black;
-            this.viewResultsBtn.Location = new System.Drawing.Point(118, 50);
+            this.viewResultsBtn.Location = new System.Drawing.Point(120, 71);
             this.viewResultsBtn.Margin = new System.Windows.Forms.Padding(2);
             this.viewResultsBtn.Name = "viewResultsBtn";
             this.viewResultsBtn.Size = new System.Drawing.Size(172, 45);
@@ -569,11 +697,25 @@
             this.viewResultsBtn.UseVisualStyleBackColor = true;
             this.viewResultsBtn.Click += new System.EventHandler(this.viewResultsBtn_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.SystemColors.Window;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Black;
+            this.label4.Location = new System.Drawing.Point(172, 15);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(265, 41);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Manage Elections";
+            // 
             // adminPanelBtn
             // 
+            this.adminPanelBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.adminPanelBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.adminPanelBtn.ForeColor = System.Drawing.Color.Black;
-            this.adminPanelBtn.Location = new System.Drawing.Point(308, 50);
+            this.adminPanelBtn.Location = new System.Drawing.Point(310, 71);
             this.adminPanelBtn.Margin = new System.Windows.Forms.Padding(2);
             this.adminPanelBtn.Name = "adminPanelBtn";
             this.adminPanelBtn.Size = new System.Drawing.Size(172, 45);
@@ -581,19 +723,6 @@
             this.adminPanelBtn.Text = "Admin Panel";
             this.adminPanelBtn.UseVisualStyleBackColor = true;
             this.adminPanelBtn.Click += new System.EventHandler(this.adminPanelBtn_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.SystemColors.Window;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(392, 30);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(265, 41);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Manage Elections";
             // 
             // addCandidates_Panel
             // 
@@ -639,6 +768,7 @@
             // 
             // candidate_Position_Box
             // 
+            this.candidate_Position_Box.BackColor = System.Drawing.Color.WhiteSmoke;
             this.candidate_Position_Box.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.candidate_Position_Box.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.candidate_Position_Box.FormattingEnabled = true;
@@ -662,6 +792,7 @@
             // candidate_BirthDate_Field
             // 
             this.candidate_BirthDate_Field.CalendarFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.candidate_BirthDate_Field.CalendarMonthBackground = System.Drawing.Color.WhiteSmoke;
             this.candidate_BirthDate_Field.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.candidate_BirthDate_Field.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.candidate_BirthDate_Field.Format = System.Windows.Forms.DateTimePickerFormat.Short;
@@ -684,6 +815,7 @@
             // 
             // candidate_PhoneNumber_Field
             // 
+            this.candidate_PhoneNumber_Field.BackColor = System.Drawing.Color.WhiteSmoke;
             this.candidate_PhoneNumber_Field.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.candidate_PhoneNumber_Field.Location = new System.Drawing.Point(547, 203);
             this.candidate_PhoneNumber_Field.Name = "candidate_PhoneNumber_Field";
@@ -704,6 +836,7 @@
             // 
             // candidate_Email_Field
             // 
+            this.candidate_Email_Field.BackColor = System.Drawing.Color.WhiteSmoke;
             this.candidate_Email_Field.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.candidate_Email_Field.Location = new System.Drawing.Point(547, 136);
             this.candidate_Email_Field.Name = "candidate_Email_Field";
@@ -775,6 +908,7 @@
             // 
             // candidate_LastName_Field
             // 
+            this.candidate_LastName_Field.BackColor = System.Drawing.Color.WhiteSmoke;
             this.candidate_LastName_Field.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.candidate_LastName_Field.Location = new System.Drawing.Point(187, 203);
             this.candidate_LastName_Field.Name = "candidate_LastName_Field";
@@ -795,6 +929,7 @@
             // 
             // candidate_FirstName_Field
             // 
+            this.candidate_FirstName_Field.BackColor = System.Drawing.Color.WhiteSmoke;
             this.candidate_FirstName_Field.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.candidate_FirstName_Field.Location = new System.Drawing.Point(187, 136);
             this.candidate_FirstName_Field.Name = "candidate_FirstName_Field";
@@ -827,65 +962,6 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "New Candidate";
             // 
-            // homeBtn
-            // 
-            this.homeBtn.ActiveLinkColor = System.Drawing.Color.Black;
-            this.homeBtn.AutoSize = true;
-            this.homeBtn.BackColor = System.Drawing.Color.Transparent;
-            this.homeBtn.DisabledLinkColor = System.Drawing.Color.Black;
-            this.homeBtn.Font = new System.Drawing.Font("Segoe UI Black", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.homeBtn.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-            this.homeBtn.LinkColor = System.Drawing.Color.Black;
-            this.homeBtn.Location = new System.Drawing.Point(71, 17);
-            this.homeBtn.Name = "homeBtn";
-            this.homeBtn.Size = new System.Drawing.Size(160, 37);
-            this.homeBtn.TabIndex = 7;
-            this.homeBtn.TabStop = true;
-            this.homeBtn.Text = "Dashboard";
-            this.homeBtn.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.homeBtn_LinkClicked);
-            // 
-            // imageColumn
-            // 
-            this.imageColumn.FillWeight = 25F;
-            this.imageColumn.HeaderText = "";
-            this.imageColumn.MinimumWidth = 6;
-            this.imageColumn.Name = "imageColumn";
-            this.imageColumn.ReadOnly = true;
-            // 
-            // candidateIDColumn
-            // 
-            this.candidateIDColumn.HeaderText = "CANDIDATE ID";
-            this.candidateIDColumn.MinimumWidth = 6;
-            this.candidateIDColumn.Name = "candidateIDColumn";
-            this.candidateIDColumn.ReadOnly = true;
-            this.candidateIDColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.candidateIDColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // fullNameColumn
-            // 
-            this.fullNameColumn.HeaderText = "FULL NAME";
-            this.fullNameColumn.MinimumWidth = 6;
-            this.fullNameColumn.Name = "fullNameColumn";
-            this.fullNameColumn.ReadOnly = true;
-            this.fullNameColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.fullNameColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // positionColumn
-            // 
-            this.positionColumn.HeaderText = "POSITION";
-            this.positionColumn.MinimumWidth = 6;
-            this.positionColumn.Name = "positionColumn";
-            this.positionColumn.ReadOnly = true;
-            this.positionColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.positionColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // votesColumn
-            // 
-            this.votesColumn.HeaderText = "VOTES";
-            this.votesColumn.MinimumWidth = 6;
-            this.votesColumn.Name = "votesColumn";
-            this.votesColumn.ReadOnly = true;
-            // 
             // welcomePanel
             // 
             this.welcomePanel.BackColor = System.Drawing.Color.Transparent;
@@ -897,36 +973,73 @@
             this.welcomePanel.Size = new System.Drawing.Size(1051, 505);
             this.welcomePanel.TabIndex = 4;
             // 
-            // label1
+            // panel4
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(266, 219);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(547, 112);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Welcome to COMELEC\r\nE-Voting System\r\n";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.panel4.BackgroundImage = global::E_Voting_System.Properties.Resources.Commission_on_Elections__COMELEC__svg;
+            this.panel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel4.Location = new System.Drawing.Point(452, 101);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(150, 150);
+            this.panel4.TabIndex = 2;
             // 
             // label20
             // 
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Segoe UI Black", 36F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
             this.label20.ForeColor = System.Drawing.Color.Black;
-            this.label20.Location = new System.Drawing.Point(466, 255);
+            this.label20.Location = new System.Drawing.Point(466, 290);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(0, 65);
             this.label20.TabIndex = 1;
             // 
-            // panel4
+            // label1
             // 
-            this.panel4.BackgroundImage = global::E_Voting_System.Properties.Resources.Commission_on_Elections__COMELEC__svg;
-            this.panel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel4.Location = new System.Drawing.Point(452, 66);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(150, 150);
-            this.panel4.TabIndex = 2;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(266, 254);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(547, 112);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Welcome to COMELEC\r\nE-Voting System\r\n";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "CANDIDATE ID";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn1.Width = 211;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "FULL NAME";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn2.Width = 212;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "POSITION";
+            this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn3.Width = 211;
+            // 
+            // dataGridViewProgressBarColumn1
+            // 
+            this.dataGridViewProgressBarColumn1.HeaderText = "VOTES";
+            this.dataGridViewProgressBarColumn1.MinimumWidth = 6;
+            this.dataGridViewProgressBarColumn1.Name = "dataGridViewProgressBarColumn1";
+            this.dataGridViewProgressBarColumn1.ReadOnly = true;
+            this.dataGridViewProgressBarColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewProgressBarColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dataGridViewProgressBarColumn1.Width = 212;
             // 
             // DashboardForm
             // 
@@ -938,7 +1051,7 @@
             this.Controls.Add(this.mainPanelDB);
             this.Controls.Add(this.panel1);
             this.ForeColor = System.Drawing.SystemColors.Control;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "DashboardForm";
@@ -953,11 +1066,11 @@
             this.addVoter_Panel.PerformLayout();
             this.mainPanelDB.ResumeLayout(false);
             this.manageElections_Panel.ResumeLayout(false);
-            this.manageElections_Panel.PerformLayout();
             this.viewResultsPanel.ResumeLayout(false);
             this.viewResultsPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.manageElections_ResultsDataGrid)).EndInit();
             this.manageElections_ChoiceBox_Panel.ResumeLayout(false);
+            this.manageElections_ChoiceBox_Panel.PerformLayout();
             this.addCandidates_Panel.ResumeLayout(false);
             this.addCandidates_Panel.PerformLayout();
             this.welcomePanel.ResumeLayout(false);
@@ -1022,14 +1135,19 @@
         private System.Windows.Forms.Button viewResultsPanel_BackBtn;
         private System.Windows.Forms.DataGridView manageElections_ResultsDataGrid;
         private System.Windows.Forms.LinkLabel homeBtn;
-        private System.Windows.Forms.DataGridViewImageColumn imageColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn candidateIDColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fullNameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn positionColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn votesColumn;
         private System.Windows.Forms.Panel welcomePanel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Button dashboardForm_ExitBtn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private DataGridViewProgressBarColumn dataGridViewProgressBarColumn1;
+        private System.Windows.Forms.DataGridViewImageColumn imageColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn candidateIDColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fullNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn positionColumn;
+        private DataGridViewProgressBarColumn votesColumn;
     }
 }

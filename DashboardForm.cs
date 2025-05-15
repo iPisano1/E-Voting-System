@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -9,8 +10,6 @@ namespace E_Voting_System
 {
     public partial class DashboardForm : Form
     {
-
-        private bool isLoggingOut = false;
         private bool adminMode = false;
         private string ScreenView;
         private int positionID;
@@ -18,20 +17,44 @@ namespace E_Voting_System
         public DashboardForm()
         {
             InitializeComponent();
+            this.Text = string.Empty;
+            this.ControlBox = false;
+            manageElections_ResultsDataGrid.DefaultCellStyle.ForeColor = Color.Black;
+            manageElections_ResultsDataGrid.DefaultCellStyle.BackColor = Color.White;
+            manageElections_ResultsDataGrid.RowsDefaultCellStyle.ForeColor = Color.Black;
+            manageElections_ResultsDataGrid.RowsDefaultCellStyle.BackColor = Color.White;
+            manageElections_ResultsDataGrid.EnableHeadersVisualStyles = false;
         }
+
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        public static extern void ReleaseCapture();
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        public static extern void SendMessage(IntPtr hwnd, int wMsg, int wParam, int lParam);
 
         private void DashboardForm_Load(object sender, EventArgs e)
         {
             if (isAdmin())
             {
                 adminBtn.Visible = true;
+                addCandidates_Button.Visible = true;
+            }
+            else if(isEmployee())
+            {
+                addCandidates_Button.Visible = true;
             }
             else
             {
+                addCandidates_Button.Visible = false;
                 adminBtn.Visible = false;
             }
             mainPanelDB.Visible = true;
             ShowOnlyPanel(welcomePanel);
+        }
+
+        private void dashboardForm_ExitBtn_Click(object sender, EventArgs e)
+        {
+            updateLoggedStatus();
+            Application.Exit();
         }
 
         private void ShowOnlyPanel(Panel panelToShow)
@@ -46,9 +69,9 @@ namespace E_Voting_System
 
         private void activeColorButton(Button buttonToChange)
         {
-            addVoter_Button.BackColor = Color.White;
-            addCandidates_Button.BackColor = Color.White;
-            manageElections_Button.BackColor = Color.White;
+            addVoter_Button.BackColor = Color.WhiteSmoke;
+            addCandidates_Button.BackColor = Color.WhiteSmoke;
+            manageElections_Button.BackColor = Color.WhiteSmoke;
 
             if (buttonToChange == null)
             {
@@ -63,12 +86,32 @@ namespace E_Voting_System
         {
             using (MySqlConnection connection = new MySqlConnection("server=localhost;user=root;password=;database=e_voting_system"))
             {
-                MySqlCommand checkCommand = new MySqlCommand("SELECT * FROM users WHERE `ID Number` = @idNumber AND Permission = 'admin'", connection);
+                MySqlCommand checkCommand = new MySqlCommand("SELECT * FROM users WHERE `ID Number` = @idNumber AND Permission = 'Admin'", connection);
                 checkCommand.Parameters.AddWithValue("@idNumber", LoginForm.CurrentUserID);
                 MySqlDataAdapter adapter = new MySqlDataAdapter(checkCommand);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
 
+                if (dt.Rows.Count > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        public bool isEmployee()
+        {
+            using (MySqlConnection connection = new MySqlConnection("server=localhost;user=root;password=;database=e_voting_system"))
+            {
+                MySqlCommand checkCommand = new MySqlCommand("SELECT * FROM users WHERE `ID Number` = @idNumber AND Permission = 'Employee'", connection);
+                checkCommand.Parameters.AddWithValue("@idNumber", LoginForm.CurrentUserID);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(checkCommand);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
                 if (dt.Rows.Count > 0)
                 {
                     return true;
@@ -114,7 +157,6 @@ namespace E_Voting_System
 
             if (result == DialogResult.Yes)
             {
-                isLoggingOut = true;
                 updateLoggedStatus();
                 LoginForm loginForm = new LoginForm();
                 loginForm.Show();
@@ -137,6 +179,8 @@ namespace E_Voting_System
             {
                 adminMode = true;
                 manageElections_Button.Visible = true;
+                adminBtn.Text = "Admin Mode Enabled";
+                adminBtn.TextImageRelation = TextImageRelation.ImageAboveText;
             }
             else
             {
@@ -156,6 +200,8 @@ namespace E_Voting_System
                     viewResultsPanel.Visible = false;
                 }
                 adminMode = false;
+                adminBtn.Text = "Admin Mode";
+                adminBtn.TextImageRelation = TextImageRelation.ImageBeforeText;
             }
         }
 
@@ -287,7 +333,7 @@ namespace E_Voting_System
         {
             using (MySqlConnection connection = new MySqlConnection("server=localhost;user=root;password=;database=e_voting_system"))
             {
-                MySqlCommand fillCommand = new MySqlCommand("SELECT `Candidate ID`, `First Name`, `Last Name` FROM candidates WHERE `Position` = @positionID", connection);
+                MySqlCommand fillCommand = new MySqlCommand("SELECT `Candidate ID`, `First Name`, `Last Name` FROM candidates WHERE `Position` = @positionID AND `Status` = 'Approved' ", connection);
                 fillCommand.Parameters.AddWithValue("@positionID", positionID);
                 try
                 {
@@ -416,10 +462,10 @@ namespace E_Voting_System
                     insertCommand_Voters.Parameters.AddWithValue("@PhoneNumber", voters_PhoneNumber_Field.Text);
                 }
 
-                MySqlCommand searchCommand = new MySqlCommand("SELECT * FROM voters WHERE `First Name` = @FirstName OR `Last Name` = @LastName OR `Email` = @Email", connection);
+                MySqlCommand searchCommand = new MySqlCommand("SELECT * FROM voters WHERE `First Name` = @FirstName OR `Last Name` = @LastName AND `Position` = @position", connection);
                 searchCommand.Parameters.AddWithValue("@FirstName", voters_FirstName_Field.Text);
                 searchCommand.Parameters.AddWithValue("@LastName", voters_LastName_Field.Text);
-                searchCommand.Parameters.AddWithValue("@Email", voters_Email_Field.Text);
+                searchCommand.Parameters.AddWithValue("@position", voters_VotePosition_Box.SelectedValue);
 
                 try
                 {
@@ -482,6 +528,7 @@ namespace E_Voting_System
             manageElections_ResultPositionBox.SelectedIndex = -1;
 
             manageElections_ResultPositionBox.SelectedIndexChanged += manageElections_ResultPositionBox_SelectedIndexChanged;
+
         }
 
 
@@ -506,8 +553,18 @@ namespace E_Voting_System
             }
         }
 
-        public void displayResultGrid(int positionID)
+        private int GetTotalVotes(MySqlConnection connection, int positionID)
         {
+            using (var cmd = new MySqlCommand(
+                "SELECT COUNT(*) FROM election e JOIN candidates c ON e.Candidate = c.`Candidate ID` WHERE c.Position = @positionID", connection))
+            {
+                cmd.Parameters.AddWithValue("@positionID", positionID);
+                return Convert.ToInt32(cmd.ExecuteScalar());
+            }
+        }
+
+        public void displayResultGrid(int positionID)
+        {   
             manageElections_ResultsDataGrid.Rows.Clear();
             using (MySqlConnection connection = new MySqlConnection("server=localhost;user=root;password=;database=e_voting_system"))
             {
@@ -532,8 +589,11 @@ namespace E_Voting_System
                             MySqlCommand voteCmd = new MySqlCommand("SELECT COUNT(*) FROM election WHERE `Candidate` = @CandidateID", connection);
                             voteCmd.Parameters.AddWithValue("@CandidateID", candidateID);
                             int voteCount = Convert.ToInt32(voteCmd.ExecuteScalar());
+                            int totalVotes = GetTotalVotes(connection, positionID);
+                            int percentage = totalVotes > 0 ? (int)(((double)voteCount / totalVotes) * 100) : 0;
+                            ProgressBarValue progressValue = new ProgressBarValue(voteCount, percentage);
 
-                            manageElections_ResultsDataGrid.Rows.Add(null, candidateID, fullName, position, voteCount);
+                            manageElections_ResultsDataGrid.Rows.Add(Properties.Resources.user_avatar, candidateID, fullName, position, progressValue);
                         }
                     }
                 }
@@ -547,5 +607,106 @@ namespace E_Voting_System
                 }
             }
         }
+
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
     }
+
+    public class ProgressBarValue
+    {
+        public int Votes { get; set; }
+        public int Percentage { get; set; }
+
+        public ProgressBarValue(int votes, int percentage)
+        {
+            Votes = votes;
+            Percentage = percentage;
+        }
+    }
+
+
+    public class DataGridViewProgressBarCell : DataGridViewTextBoxCell
+    {
+        public DataGridViewProgressBarCell()
+        {
+            this.ValueType = typeof(ProgressBarValue);
+        }
+
+        protected override void Paint(Graphics graphics,
+                              Rectangle clipBounds,
+                              Rectangle cellBounds,
+                              int rowIndex,
+                              DataGridViewElementStates cellState,
+                              object value,
+                              object formattedValue,
+                              string errorText,
+                              DataGridViewCellStyle cellStyle,
+                              DataGridViewAdvancedBorderStyle advancedBorderStyle,
+                              DataGridViewPaintParts paintParts)
+        {
+            // Paint base background and border
+            if ((paintParts & DataGridViewPaintParts.Background) == DataGridViewPaintParts.Background)
+            {
+                using (Brush backgroundBrush = new SolidBrush(cellStyle.BackColor))
+                {
+                    graphics.FillRectangle(backgroundBrush, cellBounds);
+                }
+            }
+
+            if ((paintParts & DataGridViewPaintParts.Border) == DataGridViewPaintParts.Border)
+            {
+                PaintBorder(graphics, clipBounds, cellBounds, cellStyle, advancedBorderStyle);
+            }
+
+            if (value is ProgressBarValue progressValue)
+            {
+                int percentage = progressValue.Percentage;
+                int voteCount = progressValue.Votes;
+
+                // Progress bar background
+                Rectangle barArea = new Rectangle(cellBounds.X + 2, cellBounds.Y + 2,
+                                                  cellBounds.Width - 4, cellBounds.Height - 4);
+                using (Brush backBrush = new SolidBrush(Color.LightGray))
+                {
+                    graphics.FillRectangle(backBrush, barArea);
+                }
+
+                // Progress fill
+                if (percentage > 0)
+                {
+                    int fillWidth = (int)(barArea.Width * percentage / 100.0);
+                    Rectangle fillRect = new Rectangle(barArea.X, barArea.Y, fillWidth, barArea.Height);
+                    using (Brush barBrush = new SolidBrush(Color.FromArgb(158, 188, 138)))
+                    {
+                        graphics.FillRectangle(barBrush, fillRect);
+                    }
+                }
+
+                // Vote text
+                string text = $"{voteCount} vote{(voteCount == 1 ? "" : "s")} ({percentage}%)";
+                SizeF textSize = graphics.MeasureString(text, cellStyle.Font);
+                float textX = cellBounds.X + (cellBounds.Width - textSize.Width) / 2;
+                float textY = cellBounds.Y + (cellBounds.Height - textSize.Height) / 2;
+
+                using (Brush textBrush = new SolidBrush(Color.Black))
+                {
+                    graphics.DrawString(text, cellStyle.Font, textBrush, textX, textY);
+                }
+            }
+        }
+    }
+
+    public class DataGridViewProgressBarColumn : DataGridViewColumn
+    {
+        public DataGridViewProgressBarColumn()
+        {
+            this.CellTemplate = new DataGridViewProgressBarCell();
+            this.ReadOnly = true;
+        }
+    }
+
+
 }

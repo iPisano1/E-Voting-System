@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
@@ -17,7 +18,14 @@ namespace E_Voting_System
         public LoginForm()
         {
             InitializeComponent();
+            this.Text = string.Empty;
+            this.ControlBox = false;
         }
+
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        public static extern void ReleaseCapture();
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        public static extern void SendMessage(IntPtr hwnd, int wMsg, int wParam, int lParam);
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
@@ -25,7 +33,7 @@ namespace E_Voting_System
         }
 
         public static int CurrentUserID;
-        private Boolean logSession = true;  
+        private bool logSession = true;  
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -199,6 +207,17 @@ namespace E_Voting_System
         private void loginForm_ExitBtn_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void LoginForm_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
